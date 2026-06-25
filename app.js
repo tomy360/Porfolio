@@ -423,9 +423,9 @@ function renderTabHabilidades() {
 
 function renderTabProyectos() {
   const projectImages = {
-    "Iglesia Preparando el Camino": "assets/Iglesia.png",
-    "Jotac Refrigeraciones": "assets/Servicio tecnico.png",
-    "Recetas del Día": "assets/Comida.png",
+    "Iglesia Preparando el Camino": "assets/Iglesia.webp",
+    "Jotac Refrigeraciones": "assets/Servicio tecnico.webp",
+    "Recetas del Día": "assets/Comida.webp",
   };
 
   return html`

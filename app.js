@@ -1,3 +1,134 @@
+/* ── Boot: Intro sequence before portfolio renders ─────────────────────────── */
+
+function showIntro(callback) {
+  const screen = document.getElementById("intro-screen");
+  if (!screen) { callback(); return; }
+
+  const textEl = screen.querySelector(".intro-text");
+  const phrase = "Forjando pergamino...";
+  let idx = 0;
+
+  const typeInterval = setInterval(() => {
+    if (idx < phrase.length) {
+      textEl.textContent = phrase.slice(0, idx + 1);
+      idx++;
+    } else {
+      clearInterval(typeInterval);
+    }
+  }, 60);
+
+  setTimeout(() => {
+    clearInterval(typeInterval);
+    textEl.textContent = phrase;
+    screen.classList.add("fade-out");
+    setTimeout(() => {
+      screen.classList.add("destroyed");
+      screen.remove();
+      callback();
+    }, 400);
+  }, 2500);
+}
+
+/* ── Floating Ember Particles (canvas) ─────────────────────────────────────── */
+
+function initParticles() {
+  const container = document.querySelector(".app-container");
+  if (!container) return;
+
+  const canvas = document.createElement("canvas");
+  canvas.id = "particles-canvas";
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  container.insertBefore(canvas, container.firstChild);
+
+  const ctx = canvas.getContext("2d");
+  const particles = [];
+  const COLORS = ["#f59e0b", "#d97706", "#b45309"];
+
+  for (let i = 0; i < 40; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: 1.5 + Math.random() * 3.5,
+      speed: 0.15 + Math.random() * 0.6,
+      opacity: 0.05 + Math.random() * 0.35,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      drift: Math.random() * 0.3 - 0.15,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+
+  let animId = null;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+
+  function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let hidden = document.hidden;
+
+    for (const p of particles) {
+      if (!hidden) {
+        p.y -= p.speed;
+        p.x += p.drift + Math.sin(Date.now() * 0.001 + p.phase) * 0.15;
+        if (p.y < -10) {
+          p.y = canvas.height + 10;
+          p.x = Math.random() * canvas.width;
+        }
+        if (p.x < -10) p.x = canvas.width + 10;
+        if (p.x > canvas.width + 10) p.x = -10;
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.opacity;
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    animId = requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+/* ── Custom Cursor ─────────────────────────────────────────────────────────── */
+
+function initCursor() {
+  const cursor = document.createElement("div");
+  cursor.className = "custom-cursor";
+  cursor.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+    <circle cx="12" cy="12" r="4"/>
+    <line x1="12" y1="2" x2="12" y2="7"/>
+    <line x1="12" y1="17" x2="12" y2="22"/>
+    <line x1="2" y1="12" x2="7" y2="12"/>
+    <line x1="17" y1="12" x2="22" y2="12"/>
+  </svg>`;
+  document.body.appendChild(cursor);
+  document.body.classList.add("custom-cursor-active");
+
+  let mx = 0, my = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    cursor.style.left = mx + "px";
+    cursor.style.top = my + "px";
+  });
+
+  const hoverTargets = document.querySelectorAll(
+    "a, button, input, textarea, .btn-ghost, .btn-icon, .tab-btn, .btn-link, .btn-submit, .contact-link"
+  );
+
+  hoverTargets.forEach((el) => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("hovering"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("hovering"));
+  });
+}
+
 /* ── Data ──────────────────────────────────────────────────────────────────── */
 
 const ME = {
@@ -17,13 +148,13 @@ const ME = {
 };
 
 const SKILLS_LIST = [
-  { name: "React / Next.js", level: 20, expert: false },
-  { name: "CSS / Tailwind CSS", level: 15, expert: false },
-  { name: "PostgreSQL", level: 20, expert: false },
-  { name: "Git / GitHub", level: 15, expert: false },
-  { name: "Figma", level: 15, expert: false },
-  { name: "TypeScript", level: 15, expert: false },
-  { name: "Node.js / Express", level: 20, expert: false },
+  { name: "HTML / CSS", level: 70, expert: false },
+  { name: "JavaScript", level: 55, expert: false },
+  { name: "React / Next.js", level: 40, expert: false },
+  { name: "Node.js / Express", level: 35, expert: false },
+  { name: "TypeScript", level: 30, expert: false },
+  { name: "Git / GitHub", level: 35, expert: false },
+  { name: "PostgreSQL", level: 25, expert: false },
 ];
 
 const PROJECTS = [
@@ -202,7 +333,7 @@ function renderHero() {
 
 function renderTabSobreMi() {
   const jobs = [
-    { role: "Front End Developer Freelance", company: "Independiente", period: "2025 — Presente", desc: "Desarrollo de sitios web y aplicaciones frontend para clientes freelance. Creación de interfaces responsivas, integración de APIs y optimización de rendimiento." },
+    { role: "Front End Developer Freelance", company: "Independiente", period: "2026 — Presente", desc: "Desarrollo de sitios web y aplicaciones frontend para clientes freelance. Creación de interfaces responsivas, integración de APIs y optimización de rendimiento." },
   ];
 
   const personalInfo = [
@@ -216,7 +347,7 @@ function renderTabSobreMi() {
     { label: "Proyectos", value: ME.projectsDone },
     { label: "Años exp.", value: ME.yearsExp },
     { label: "Clientes", value: ME.satisfiedClients },
-    { label: "Contribs. OS", value: ME.openSourceContribs },
+    { label: "Proyectos Web", value: "5" },
   ];
 
   const favTechs = ["VS Code", "Node.js", "React", "SQL"];
@@ -326,12 +457,19 @@ function renderTabHabilidades() {
 }
 
 function renderTabProyectos() {
+  const projectImages = {
+    "Iglesia Preparando el Camino": "assets/Iglesia.png",
+    "Jotac Refrigeraciones": "assets/Servicio tecnico.png",
+    "Recetas del Día": "assets/Comida.png",
+  };
+
   return html`
     <div class="projects-list">
       ${PROJECTS.map((p, i) => html`
         <div class="project-card" data-delay="${i * 0.09}" data-idx="${i}">
           ${renderCard(`
             <div class="project-inner">
+              ${projectImages[p.name] ? `<div class="project-img-col"><img src="${projectImages[p.name]}" alt="${p.name}" class="project-img" /></div>` : ""}
               <div class="project-info">
                 <div class="project-title-row">
                   <h3 class="project-title">${p.name}</h3>
@@ -494,12 +632,19 @@ function switchTab(tabId) {
   const renderer = TAB_RENDERERS[tabId];
   if (renderer && tabContentEl) {
     tabContentEl.classList.remove("visible");
-    tabContentEl.innerHTML = renderer();
-    void tabContentEl.offsetHeight;
-    requestAnimationFrame(() => {
-      tabContentEl.classList.add("visible");
-      runTabAnimations(tabId);
-    });
+    tabContentEl.classList.add("fade-out");
+    tabContentEl.classList.remove("clip-in");
+
+    setTimeout(() => {
+      tabContentEl.innerHTML = renderer();
+      void tabContentEl.offsetHeight;
+      tabContentEl.classList.remove("fade-out");
+      tabContentEl.classList.add("clip-in");
+      requestAnimationFrame(() => {
+        tabContentEl.classList.add("visible");
+        runTabAnimations(tabId);
+      });
+    }, 160);
   }
 }
 
@@ -524,7 +669,19 @@ function animateSkills() {
   bars.forEach((bar) => {
     const level = bar.dataset.level;
     const delay = parseFloat(bar.dataset.delay || 0.2) * 1000;
-    setTimeout(() => { bar.style.width = level + "%"; }, delay);
+    setTimeout(() => {
+      bar.style.width = level + "%";
+      bar.classList.add("enchanted");
+
+      const parent = bar.closest(".skill-bar");
+      if (parent && !parent.querySelector(".skill-spark")) {
+        for (let s = 0; s < 3; s++) {
+          const spark = document.createElement("span");
+          spark.className = "skill-spark";
+          parent.appendChild(spark);
+        }
+      }
+    }, delay);
   });
 }
 
@@ -574,6 +731,9 @@ function init() {
   requestAnimationFrame(() => {
     document.getElementById("hero")?.classList.add("visible");
   });
+
+  initParticles();
+  initCursor();
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => showIntro(init));

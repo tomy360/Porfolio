@@ -95,40 +95,6 @@ function initParticles() {
   loop();
 }
 
-/* ── Custom Cursor ─────────────────────────────────────────────────────────── */
-
-function initCursor() {
-  const cursor = document.createElement("div");
-  cursor.className = "custom-cursor";
-  cursor.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-    <circle cx="12" cy="12" r="4"/>
-    <line x1="12" y1="2" x2="12" y2="7"/>
-    <line x1="12" y1="17" x2="12" y2="22"/>
-    <line x1="2" y1="12" x2="7" y2="12"/>
-    <line x1="17" y1="12" x2="22" y2="12"/>
-  </svg>`;
-  document.body.appendChild(cursor);
-  document.body.classList.add("custom-cursor-active");
-
-  let mx = 0, my = 0;
-
-  document.addEventListener("mousemove", (e) => {
-    mx = e.clientX;
-    my = e.clientY;
-    cursor.style.left = mx + "px";
-    cursor.style.top = my + "px";
-  });
-
-  const hoverTargets = document.querySelectorAll(
-    "a, button, input, textarea, .btn-ghost, .btn-icon, .tab-btn, .btn-link, .btn-submit, .contact-link"
-  );
-
-  hoverTargets.forEach((el) => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("hovering"));
-    el.addEventListener("mouseleave", () => cursor.classList.remove("hovering"));
-  });
-}
-
 /* ── Data ──────────────────────────────────────────────────────────────────── */
 
 const ME = {
@@ -733,7 +699,6 @@ function init() {
   });
 
   initParticles();
-  initCursor();
 }
 
 document.addEventListener("DOMContentLoaded", () => showIntro(init));

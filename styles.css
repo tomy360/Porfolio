@@ -1329,26 +1329,6 @@ textarea {
 }
 
 /* ── 5. Custom Cursor ──────────────────────────────────────────────────────── */
-body.custom-cursor-active {
-  cursor: none;
-}
-
-.custom-cursor {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99999;
-  width: 24px;
-  height: 24px;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s, color 0.15s;
-  color: var(--amber-500);
-}
-
-.custom-cursor.hovering {
-  transform: translate(-50%, -50%) scale(1.5);
-  color: var(--amber-300);
-}
-
 /* ── 6. Skill Bar Enchantment ──────────────────────────────────────────────── */
 .skill-bar {
   position: relative;

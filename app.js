@@ -391,8 +391,7 @@ function renderTabSobreMi() {
 
 function renderTabHabilidades() {
   const otherTools = [
-    "Jest / Vitest", "AWS S3", "Vercel", "GitHub Actions", "Linux", "REST APIs",
-    "Prisma ORM", "MongoDB", "Socket.io", "Vite", "ESLint", "Prettier",
+    "Vercel", "Cloudflare", "VS Code", "OpenCode", "GitHub", "Supabase", "Web3Forms",
   ];
 
   return html`

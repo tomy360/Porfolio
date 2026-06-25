@@ -172,7 +172,7 @@ const PROJECTS = [
 ];
 
 const CERTIFICATIONS = [
-  { name: "Desarrollo Web en HTML5 y CSS3", issuer: "Universidad de Helsinki", year: 2026, fileUrl: "certificados/Desarrollo_Web_en_Html5_y_Css3.pdf" },
+  { name: "Desarrollo Web en HTML5 y CSS3", issuer: "UTN.BA", year: 2026, fileUrl: "certificados/Desarrollo_Web_en_Html5_y_Css3.pdf" },
   { name: "Professional Front End Developer", issuer: "En curso...", year: 2026, fileUrl: "#" },
 ];
 

@@ -105,7 +105,7 @@ const ME = {
   available: true,
   cvUrl: "certificados/Tomas-Sassone-CV.pdf",
   github: "https://github.com/tomy360",
-  linkedin: "https://linkedin.com/in/tu-perfil",
+  linkedin: "https://linkedin.com/in/tomas-gerardo-sassone",
   email: "tomilamaja@hotmail.com",
   yearsExp: "1",
   projectsDone: "5",

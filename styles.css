@@ -941,6 +941,11 @@ textarea {
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.35s, transform 0.35s;
+  display: flex;
+}
+
+.cert-card > .card {
+  flex: 1;
 }
 
 .cert-card.visible {

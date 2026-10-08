@@ -318,7 +318,7 @@ function renderTabSobreMi() {
     { label: "Proyectos Web", value: "5" },
   ];
 
-  const favTechs = ["VS Code", "Node.js", "React", "SQL"];
+  const favTechs = ["VS Code", "Node.js", "React", "SQL", "ElectronForce"];
 
   const timelineHTML = jobs.map((job, i) => html`
     <div class="timeline-item">
@@ -382,7 +382,7 @@ function renderTabSobreMi() {
 
         ${renderCard(`
           <div class="card-body">
-            <h3 class="section-title-sm">Tecnologías favoritas</h3>
+            <h3 class="section-title-sm">Tecnologías tas</h3>
             <div class="tags-row">
               ${favTechs.map(t => renderTag(t)).join("")}
             </div>

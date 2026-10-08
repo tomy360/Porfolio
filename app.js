@@ -175,6 +175,7 @@ const CERTIFICATIONS = [
   { name: "Desarrollo Web en HTML5 y CSS3", issuer: "UTN.BA", year: 2026, fileUrl: "certificados/Desarrollo_Web_en_Html5_y_Css3.pdf" },
   { name: "Desarrollo Web con Javascript", issuer: "UTN.BA", year: 2026, fileUrl: "certificados/Desarrollo_Web_con_Javascript.pdf" },
   { name: "Desarrollo web en HTML 5 CSS3 y Javascript nivel avanzado", issuer: "UTN.BA", year: 2026, fileUrl: "certificados/Desarrollo_web_en_HTML_5__CSS3_y_Javascript__nivel_avanzado_.pdf" },
+  { name: "Storytelling en el Marketing Digital", issuer: "Santander Open Academy", year: 2026, fileUrl: "certificados/Storytelling_en_el_Marketing_Digital.pdf" },
 ];
 
 const TABS = [
